@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+
+import userRoute from './routes/userRoute';
 dotenv.config();
 
 const app = express();
@@ -22,7 +24,9 @@ mongoose.connect(
         else console.log('connected to db!')
     });
 
-const port = process.env.PORT || 3030;
+app.use('/api/auth', userRoute);
+
+const port = process.env.PORT || 7070;
 app.listen(port, () => {
     console.log(`Server is up and running on port ${port}`);
 })
