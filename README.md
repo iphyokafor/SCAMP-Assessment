@@ -13,7 +13,7 @@ Ensure you have the following installed on your local machine:
 
 ### Installing/Running locally
 
-- Clone or fork repo
+- Clone or fork repo🙂
 
   ```bash
     - git clone <repo>
