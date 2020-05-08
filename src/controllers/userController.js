@@ -20,11 +20,7 @@ export default {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
         const user = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hashedPassword,
-            role: req.body.role,
+            ...req.body
         });
 
 

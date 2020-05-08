@@ -29,13 +29,7 @@ const userSchema = mongoose.Schema({
       type: String,
       role: ['Admin', 'SalesPerson'],
       default: 'SalesPerson'
-    },
-    // isAdmin: {
-    //   type: Boolean,
-    //   required: true,
-    //   default:false
-    
-    // }
+    }
 }, { timestamps: true });
 
 userSchema.methods.toJSON =function () {

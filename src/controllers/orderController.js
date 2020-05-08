@@ -37,12 +37,7 @@ export default {
 
   getAllOrders: async(req, res) => {
       try {
-          const getOrders = await Order.find({}).populate({
-            path: 'products',
-            populate:{
-              path: 'orders'
-            }
-          }).populate('products');
+          const getOrders = await Order.find({}).populate('products');
           return res.json({
               message: 'View all orders',
               getOrders
