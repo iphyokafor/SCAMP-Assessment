@@ -20,7 +20,11 @@ export default {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
         const user = new User({
-            ...req.body
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hashedPassword,
+            role: req.body.role,
         });
 
 
@@ -60,5 +64,20 @@ export default {
           message: 'logged in',
           user
       });
-  }
+  },
+
+  getAllUsers: async(req, res) => {
+    try {
+        const getUsers = await User.find({});
+        return res.json({
+            message: 'View all users',
+            getUsers
+        });
+
+    } catch (err) {
+        return res.json({
+            message: err
+        });
+    }
+},
 };

@@ -8,7 +8,7 @@ const registerValidation = (data) => {
             .trim()
             .lowercase()
             .required(),
-            lastName: Joi.string()
+        lastName: Joi.string()
             .min(2)
             .max(50)
             .trim()
@@ -24,6 +24,9 @@ const registerValidation = (data) => {
         password: Joi.string()
             .alphanum()
             .min(8)
+            .required(),
+        role: Joi.string()
+            .lowercase()
             .required()
     });
     return Joi.validate(data, schema);

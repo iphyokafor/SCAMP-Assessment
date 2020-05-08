@@ -4,9 +4,9 @@ import Product from '../models/productModel';
 
 export default {
   addOrder: async(req, res) => {
-      const { name } = req.body;
-      const nameExist = await Order.findOne({ name });
-      if (nameExist) {
+      const { products } = req.body;
+      const productsExist = await Order.findOne({ products });
+      if (productsExist) {
           return res.status(400).json({
               message: 'Order already exists'
           });
