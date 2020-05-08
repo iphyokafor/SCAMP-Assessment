@@ -13,10 +13,11 @@ describe("User authentication process", () => {
                 .request(app)
                 .post(`${url}/register`)
                 .send({
-                    first_name: 'l',
-                    last_name: 'j',
+                    firstName: 'l',
+                    lastName: 'j',
                     email: '',
-                    password: 'lo123'
+                    password: 'lo123',
+                    role: 'SalesPerson'
                 });
             expect(res).to.have.status(400);
         });
@@ -26,10 +27,11 @@ describe("User authentication process", () => {
                 .request(app)
                 .post(`${url}/register`)
                 .send({
-                    first_name: "lois",
-                    last_name: "simon",
-                    email: "lois@yahoo.com",
-                    password: "loismonl123"
+                    role: "SalesPerson",
+                    firstName: "xavi",
+                    lastName: "francis",
+                    email: "xavi@yahoo.com",
+                    password: "xavifrancis123"
                 });
             expect(res).to.have.status(400);
             // expect(res.body).to.have.property(message);
@@ -43,7 +45,8 @@ describe("User authentication process", () => {
                     first_name: "xavier",
                     last_name: "francis",
                     email: "xavier@yahoo.com",
-                    password: "xavier123"
+                    password: "xavier123",
+                    role: "Admin"
                 });
             // expect(res).to.have.status(201);
             // expect(res.body).to.have.property(message);
@@ -55,7 +58,7 @@ describe("User authentication process", () => {
             const res = await chai.request(app)
                 .post(`${url}/login`)
                 .send({
-                    email: 'lois@yahoo.com',
+                    email: 'xavi@yahoo.com',
                     password: '123'
                 });
             expect(res).to.have.status(400);
@@ -77,8 +80,8 @@ describe("User authentication process", () => {
                 .request(app)
                 .post(`${url}/login`)
                 .send({
-                    email: "lois@yahoo.com",
-                    password: "loismonl123"
+                    email: "xavi@yahoo.com",
+                    password: "xavifrancis123"
                 });
             // expect(res).to.have.status(201);
         });
@@ -88,7 +91,7 @@ describe("User authentication process", () => {
                 .request(app)
                 .post(`${url}/login`)
                 .send({
-                    email: "lois@yahoo.com",
+                    email: "xavi@yahoo.com",
                     password: "ggst234"
                 });
             expect(res).to.have.status(400);

@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
-import orderRoute from './routes/orderRoute';
+import inventoryRoute from './routes/inventoryRoute';
 dotenv.config();
 
 const app = express();
@@ -28,7 +28,7 @@ mongoose.connect(
 
 app.use('/api/auth', userRoute);
 app.use('/', productRoute);
-app.use('/', orderRoute);
+app.use('/', inventoryRoute);
 
 const port = process.env.PORT || 7070;
 app.listen(port, () => {

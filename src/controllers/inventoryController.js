@@ -1,18 +1,18 @@
-import Order from '../models/orderModel';
+import Inventory from '../models/inventoryModel';
 import User from '../models/userModel';
 import Product from '../models/productModel';
 
 export default {
-  addOrder: async(req, res) => {
+  addInventory: async(req, res) => {
       const { products } = req.body;
-      const productsExist = await Order.findOne({ products });
+      const productsExist = await Inventory.findOne({ products });
       if (productsExist) {
           return res.status(400).json({
-              message: 'Order already exists'
+              message: 'Inventory already exists'
           });
       }
 
-      const order = new Order({
+      const inventory = new Inventory({
           // active: req.body.active,
           // products: req.body.products,
           // modifiedOn:req.body.modifiedOn,
@@ -22,10 +22,10 @@ export default {
       });
 
       try {
-          const savedOrder = await order.save();
+          const savedInventory = await inventory.save();
           return res.status(201).json({
-              message: 'Order has been added successfully',
-              savedOrder
+              message: 'Inventory has been added successfully',
+              savedInventory
           });
 
       } catch (err) {
@@ -35,12 +35,12 @@ export default {
       }
   },
 
-  getAllOrders: async(req, res) => {
+  getAllInventories: async(req, res) => {
       try {
-          const getOrders = await Order.find({}).populate('products');
+          const getInventories = await Inventory.find({}).populate('products').populate('userId');
           return res.json({
-              message: 'View all orders',
-              getOrders
+              message: 'View all Inventories',
+              getInventories
           });
 
       } catch (err) {

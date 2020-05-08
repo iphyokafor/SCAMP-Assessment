@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const Schema = mongoose;
-const orderSchema = mongoose.Schema({
+const inventorySchema = mongoose.Schema({
   userId: {
     type: Schema.Types.ObjectId,
   ref: 'User'
@@ -21,11 +21,7 @@ const orderSchema = mongoose.Schema({
     type: Date,
     default:Date.now()
   },
-  role: {
-    type: String,
-    role: ['Admin', 'SalesPerson'],
-    default: 'SalesPerson'
-  }
+  
 }, {timestamps: true}
 );
- export default mongoose.model('Order', orderSchema);
+ export default mongoose.model('Inventory', inventorySchema);

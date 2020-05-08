@@ -1,5 +1,4 @@
 const isAdmin = (req, res, next) => {
-  console.log('my admin area', req.user.role);
   if (req.user.role !== 'Admin'){
     return res.status(401).json({
       status: 401,
