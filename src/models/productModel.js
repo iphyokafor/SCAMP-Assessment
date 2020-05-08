@@ -15,10 +15,6 @@ const productSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  // orders:[{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Order'
-  // }]
 }, {timestamps: true} 
 );
 

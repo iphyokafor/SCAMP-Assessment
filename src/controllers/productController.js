@@ -1,5 +1,4 @@
 import Product from '../models/productModel';
-import User from '../models/userModel';
 
 export default {
   addProduct: async(req, res) => {
@@ -12,9 +11,6 @@ export default {
       }
 
       const product = new Product({
-          // name: req.body.name,
-          // quantity: req.body.quantity,
-          // price: req.body.price
           ...req.body,
           user: req.user._id
       });
@@ -47,4 +43,38 @@ export default {
           });
       }
   },
+
+  getOneProduct: async(req, res) => {
+    try {
+        const product = await Product.findById(req.params.productId);
+        res.json(product);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+},
+deleteProduct: async(req, res) => {
+    try {
+        const removedProduct = await Product.deleteOne({ _id: req.params.productId });
+        res.json(removedProduct);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+},
+updateProduct: async(req, res) => {
+    try {
+        const updatedProduct = await Product.updateOne({ _id: req.params.productId }, { $set: { name: req.body.name, quantity: req.body.quantity, price: req.body.price } });
+        res.json({
+            message: 'Product updated successfully',
+            updatedProduct
+        });
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+}
 }
