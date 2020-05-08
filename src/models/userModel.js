@@ -30,6 +30,21 @@ const userSchema = mongoose.Schema({
       role: ['Admin', 'SalesPerson'],
       default: 'SalesPerson'
     },
+    // isAdmin: {
+    //   type: Boolean,
+    //   required: true,
+    //   default:false
+    
+    // }
 }, { timestamps: true });
+
+userSchema.methods.toJSON =function () {
+  const user = this
+  const userObject = user.toObject()
+
+delete userObject.password
+
+  return userObject
+}
 
 export default mongoose.model('User', userSchema);

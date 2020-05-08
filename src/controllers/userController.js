@@ -29,13 +29,13 @@ export default {
 
 
         try {
-            const savedUser = await user.save();
-            const {_id, firstName, lastName, email,role} = user
+            const _savedUser = await user.save();
+            const token = jwt.sign({_id: user._id, role: user.role }, process.env.TOKEN_SECRET);
             res.send({
                 status: 201,
                 message: "User successfully registered",
-                // user: user._id, 
-                user: {_id, firstName, lastName, email,role }
+                _savedUser, 
+                token,
             });
 
         } catch (err) {
@@ -57,11 +57,12 @@ export default {
           return res.status(400).send('Invalid Password');
       }
 
-      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+      const token = jwt.sign({ _id: user._id, role: user.role }, process.env.TOKEN_SECRET);
       res.header('auth-token', token).send({
           status: 200,
           token,
-          message: 'logged in'
+          message: 'logged in',
+          user
       });
   }
 };
