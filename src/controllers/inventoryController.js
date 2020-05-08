@@ -1,6 +1,4 @@
 import Inventory from '../models/inventoryModel';
-import User from '../models/userModel';
-import Product from '../models/productModel';
 
 export default {
   addInventory: async(req, res) => {
@@ -13,10 +11,6 @@ export default {
       }
 
       const inventory = new Inventory({
-          // active: req.body.active,
-          // products: req.body.products,
-          // modifiedOn:req.body.modifiedOn,
-          // role: req.body.role
           ...req.body,
           userId: req.user._id,
       });
@@ -49,4 +43,38 @@ export default {
           });
       }
   },
+
+  getOneInventory: async(req, res) => {
+    try {
+        const inventory = await Inventory.findById(req.params.inventoryId);
+        res.json(inventory);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+},
+deleteInventory: async(req, res) => {
+    try {
+        const removedInventory = await Inventory.deleteOne({ _id: req.params.inventoryId });
+        res.json(removedInventory);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+},
+updateInventory: async(req, res) => {
+    try {
+        const updatedInventory = await Inventory.updateOne({ _id: req.params.inventoryId }, { $set: { products: req.body.products, active: req.body.active, modifiedOn: req.body.modifiedOn } });
+        res.json({
+            message: 'Inventory updated successfully',
+            updatedInventory
+        });
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+}
 }
