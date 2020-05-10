@@ -10,6 +10,7 @@ Ensure you have the following installed on your local machine:
 
 - [NodeJS](https://nodejs.org/en/download/)
 - [MongoDB](https://www.mongodb.org/download/)
+- Postman API Documentation (https://documenter.getpostman.com/view/8629267/SzmfZHwN)
 
 ### Installing/Running locally
 
